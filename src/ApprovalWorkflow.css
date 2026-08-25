@@ -1,0 +1,281 @@
+/* ApprovalWorkflow.css */
+.approval-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.approval-header {
+  margin-bottom: 2rem;
+}
+
+.approval-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+}
+
+.approval-header p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.approval-layout {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Left Panel: List */
+.requests-list-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.requests-list-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.no-requests {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+}
+
+.request-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.request-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.request-item.active {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: var(--color-blue);
+}
+
+.req-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.req-id {
+  font-weight: 600;
+  color: #fff;
+}
+
+.req-score {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.req-details {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Right Panel: Review Detail */
+.review-detail-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  min-height: 500px;
+}
+
+.empty-state {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-style: italic;
+  min-height: 400px;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.detail-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.detail-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.info-item .label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.info-item .value {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.risk-alert-box {
+  grid-column: span 2;
+  background: rgba(248, 113, 113, 0.05);
+  border-left: 4px solid var(--color-red);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* Review Form Section */
+.review-form {
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.remarks-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.required {
+  color: var(--color-red);
+}
+
+.remarks-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.remarks-input:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+.remarks-input.border-red {
+  border-color: var(--color-red);
+  background: rgba(248, 113, 113, 0.05);
+}
+
+.word-count-info {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+.text-green { color: var(--color-green); }
+
+.error-message {
+  margin-top: 0.5rem;
+  color: var(--color-red);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(248, 113, 113, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+.action-buttons button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-reject {
+  background: transparent;
+  border: 1px solid var(--color-red) !important;
+  color: var(--color-red);
+}
+
+.btn-reject:hover {
+  background: var(--color-red);
+  color: #000;
+}
+
+.btn-approve {
+  background: var(--color-green);
+  color: #000;
+}
+
+.btn-approve:hover {
+  background: #3ac76b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.2);
+}
+
+/* Make sure container handles box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
