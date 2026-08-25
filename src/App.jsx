@@ -121,7 +121,7 @@ const App = () => {
             {/* Top Metrics Section */}
             <section className="metrics-grid">
               <div className="metric-card">
-                <h3 className="metric-title">Total Transactions</h3>
+                <h3 className="metric-title">Total Transactions Approved</h3>
                 <p className="metric-value">
                   {metrics.totalTransactions}
                 </p>
