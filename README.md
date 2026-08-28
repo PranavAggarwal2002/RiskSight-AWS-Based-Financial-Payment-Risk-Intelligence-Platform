@@ -1,6 +1,16 @@
-# FinSight
-Cloud-based financial risk intelligence platform using AWS to assess vendor payment requests, generate explainable risk scores, and support finance-team review.
+# React + Vite
 
-Organizations process a large volume of vendor payment requests, making it difficult for finance teams to manually analyze every transaction. Most requests follow normal patterns, but some may contain anomalies such as unusual amounts, unfamiliar accounts, locations, or transaction timings. Reviewing every request equally increases workload and can delay legitimate payments, while making it harder to prioritize transactions that actually require attention.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-RiskSight-AWS-Based-Financial-Payment-Risk-Intelligence-Platform classifies incoming payment requests into risk levels based on the vendor's historical behaviour and transaction trends. The vendor's behavioural profile is continuously updated as approved transactions are processed. When a potentially risky transaction is detected, RiskSight-AWS-Based-Financial-Payment-Risk-Intelligence-Platform alerts the finance team, enabling them to focus their attention on risky transactions while routine transactions can flow with minimal intervention.
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
