@@ -15,10 +15,19 @@ import ApprovalWorkflow from './ApprovalWorkflow';
 import Login from './Login';
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [activeTab, setActiveTab] = useState('dashboard');
 
   useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+    
     if (user && user.role === 'client') {
       setActiveTab('request');
     } else if (user) {

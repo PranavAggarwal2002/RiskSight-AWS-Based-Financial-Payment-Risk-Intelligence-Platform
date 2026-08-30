@@ -7,10 +7,10 @@ const ApprovalWorkflow = ({ user }) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch('/api/finance/reviews');
+        const response = await fetch('/api/dashboard');
         if (response.ok) {
           const data = await response.json();
-          let requests = data.pending_reviews || [];
+          let requests = data.recent_risky_transactions || data.recent_flagged_transactions || [];
           if (user && user.role === 'manager') {
             requests = requests.filter(tx => tx.risk_level === 'HIGH' || tx.risk_score > 75); // Assuming score > 75 is high if risk_level isn't present
           } else if (user && user.role === 'finance') {
