@@ -55,11 +55,10 @@ const App = () => {
           });
 
           let transactions = data.recent_risky_transactions || data.recent_flagged_transactions || [];
-          if (user && user.role === 'manager') {
-            transactions = transactions.filter(tx => tx.risk_level === 'HIGH');
-          } else if (user && user.role === 'finance') {
+          if (user && user.role === 'finance') {
             transactions = transactions.filter(tx => tx.risk_level === 'LOW' || tx.risk_level === 'MEDIUM');
           }
+          // Manager sees all transactions, so no filter needed for manager
           setRecentTransactions(transactions);
 
           if (data.risk_distribution) {
@@ -69,11 +68,8 @@ const App = () => {
                 { name: 'Low Risk', count: data.risk_distribution.LOW || 0, color: '#4caf50' },
                 { name: 'Medium Risk', count: data.risk_distribution.MEDIUM || 0, color: '#ffeb3b' }
               ];
-            } else if (user && user.role === 'manager') {
-              chartData = [
-                { name: 'High Risk', count: data.risk_distribution.HIGH || 0, color: '#f44336' }
-              ];
             } else {
+              // Manager and Admin see all risks
               chartData = [
                 { name: 'Low Risk', count: data.risk_distribution.LOW || 0, color: '#4caf50' },
                 { name: 'Medium Risk', count: data.risk_distribution.MEDIUM || 0, color: '#ffeb3b' },
