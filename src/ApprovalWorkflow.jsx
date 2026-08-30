@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ApprovalWorkflow.css';
 
-const ApprovalWorkflow = () => {
+const ApprovalWorkflow = ({ user }) => {
   const [pendingRequests, setPendingRequests] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,13 @@ const ApprovalWorkflow = () => {
         const response = await fetch('/api/finance/reviews');
         if (response.ok) {
           const data = await response.json();
-          setPendingRequests(data.pending_reviews || []);
+          let requests = data.pending_reviews || [];
+          if (user && user.role === 'manager') {
+            requests = requests.filter(tx => tx.risk_level === 'HIGH' || tx.risk_score > 75); // Assuming score > 75 is high if risk_level isn't present
+          } else if (user && user.role === 'finance') {
+            requests = requests.filter(tx => tx.risk_level === 'LOW' || tx.risk_level === 'MEDIUM' || (tx.risk_score && tx.risk_score <= 75));
+          }
+          setPendingRequests(requests);
         } else {
           console.error('Failed to fetch reviews');
         }
@@ -19,7 +25,7 @@ const ApprovalWorkflow = () => {
       }
     };
     fetchReviews();
-  }, []);
+  }, [user]);
 
   const [selectedTx, setSelectedTx] = useState(null);
   const [remarks, setRemarks] = useState('');
@@ -57,7 +63,7 @@ const ApprovalWorkflow = () => {
     const payload = {
       request_id: selectedTx.request_id,
       decision: decision,
-      reviewed_by: 'Finance Team',
+      reviewed_by: user?.email || 'Finance Team',
       description: remarks
     };
 

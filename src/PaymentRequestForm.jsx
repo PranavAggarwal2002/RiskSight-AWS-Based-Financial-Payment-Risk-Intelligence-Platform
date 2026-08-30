@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './PaymentRequestForm.css';
 
-const PaymentRequestForm = () => {
+const PaymentRequestForm = ({ user }) => {
   const [formData, setFormData] = useState({
-    vendorId: '',
+    vendorId: user?.vendor_id || '',
     accountId: '',
     amount: '',
     timeStamp: new Date().toISOString().slice(0, 16),
@@ -40,7 +40,7 @@ const PaymentRequestForm = () => {
       if (response.ok) {
         alert('Payment request submitted successfully!');
         setFormData({
-          vendorId: '',
+          vendorId: user?.vendor_id || '',
           accountId: '',
           amount: '',
           timeStamp: new Date().toISOString().slice(0, 16),
@@ -75,6 +75,8 @@ const PaymentRequestForm = () => {
             onChange={handleChange}
             placeholder="e.g. VEND-8492"
             required
+            disabled={user?.role === 'client'}
+            readOnly={user?.role === 'client'}
           />
         </div>
 

@@ -12,9 +12,19 @@ import {
 import './App.css';
 import PaymentRequestForm from './PaymentRequestForm';
 import ApprovalWorkflow from './ApprovalWorkflow';
+import Login from './Login';
 
 const App = () => {
+  const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('dashboard');
+
+  useEffect(() => {
+    if (user && user.role === 'client') {
+      setActiveTab('request');
+    } else if (user) {
+      setActiveTab('dashboard');
+    }
+  }, [user]);
 
   const [metrics, setMetrics] = useState({
     totalTransactions: '-',
@@ -44,14 +54,33 @@ const App = () => {
             riskAlerts: data.risk_alerts ?? '-',
           });
 
-          setRecentTransactions(data.recent_risky_transactions || data.recent_flagged_transactions || []);
+          let transactions = data.recent_risky_transactions || data.recent_flagged_transactions || [];
+          if (user && user.role === 'manager') {
+            transactions = transactions.filter(tx => tx.risk_level === 'HIGH');
+          } else if (user && user.role === 'finance') {
+            transactions = transactions.filter(tx => tx.risk_level === 'LOW' || tx.risk_level === 'MEDIUM');
+          }
+          setRecentTransactions(transactions);
 
           if (data.risk_distribution) {
-            setRiskChartData([
-              { name: 'Low Risk', count: data.risk_distribution.LOW || 0, color: '#4caf50' },
-              { name: 'Medium Risk', count: data.risk_distribution.MEDIUM || 0, color: '#ffeb3b' },
-              { name: 'High Risk', count: data.risk_distribution.HIGH || 0, color: '#f44336' },
-            ]);
+            let chartData = [];
+            if (user && user.role === 'finance') {
+              chartData = [
+                { name: 'Low Risk', count: data.risk_distribution.LOW || 0, color: '#4caf50' },
+                { name: 'Medium Risk', count: data.risk_distribution.MEDIUM || 0, color: '#ffeb3b' }
+              ];
+            } else if (user && user.role === 'manager') {
+              chartData = [
+                { name: 'High Risk', count: data.risk_distribution.HIGH || 0, color: '#f44336' }
+              ];
+            } else {
+              chartData = [
+                { name: 'Low Risk', count: data.risk_distribution.LOW || 0, color: '#4caf50' },
+                { name: 'Medium Risk', count: data.risk_distribution.MEDIUM || 0, color: '#ffeb3b' },
+                { name: 'High Risk', count: data.risk_distribution.HIGH || 0, color: '#f44336' },
+              ];
+            }
+            setRiskChartData(chartData);
           }
         } else {
           console.error("Failed to fetch dashboard data");
@@ -64,7 +93,7 @@ const App = () => {
     if (activeTab === 'dashboard') {
       fetchDashboardData();
     }
-  }, [activeTab]);
+  }, [activeTab, user]);
 
   const getStatusColor = (riskLevel) => {
     if (riskLevel === 'HIGH') return 'red';
@@ -72,6 +101,12 @@ const App = () => {
     if (riskLevel === 'LOW') return 'green';
     return 'gray';
   };
+
+  if (!user) {
+    return <Login onLogin={setUser} />;
+  }
+
+  const isClient = user.role === 'client';
 
   return (
     <div className="dashboard-container">
@@ -85,31 +120,41 @@ const App = () => {
           </h1>
 
           <nav className="top-nav">
-            <button
-              className={`nav-btn ${
-                activeTab === 'dashboard' ? 'active' : ''
-              }`}
-              onClick={() => setActiveTab('dashboard')}
-            >
-              Dashboard
-            </button>
+            {!isClient && (
+              <button
+                className={`nav-btn ${
+                  activeTab === 'dashboard' ? 'active' : ''
+                }`}
+                onClick={() => setActiveTab('dashboard')}
+              >
+                Dashboard
+              </button>
+            )}
 
-            <button
-              className={`nav-btn ${
-                activeTab === 'request' ? 'active' : ''
-              }`}
-              onClick={() => setActiveTab('request')}
-            >
-              Submit Request
-            </button>
+            {isClient && (
+              <button
+                className={`nav-btn ${
+                  activeTab === 'request' ? 'active' : ''
+                }`}
+                onClick={() => setActiveTab('request')}
+              >
+                Submit Request
+              </button>
+            )}
 
-            <button
-              className={`nav-btn ${
-                activeTab === 'approve' ? 'active' : ''
-              }`}
-              onClick={() => setActiveTab('approve')}
-            >
-              Review & Approve
+            {!isClient && (
+              <button
+                className={`nav-btn ${
+                  activeTab === 'approve' ? 'active' : ''
+                }`}
+                onClick={() => setActiveTab('approve')}
+              >
+                Review & Approve
+              </button>
+            )}
+
+            <button className="nav-btn logout-btn" onClick={() => setUser(null)} style={{marginLeft: 'auto'}}>
+              Logout
             </button>
           </nav>
         </div>
@@ -285,9 +330,9 @@ const App = () => {
           </>
         )}
 
-        {activeTab === 'request' && <PaymentRequestForm />}
+        {activeTab === 'request' && <PaymentRequestForm user={user} />}
 
-        {activeTab === 'approve' && <ApprovalWorkflow />}
+        {activeTab === 'approve' && <ApprovalWorkflow user={user} />}
       </main>
     </div>
   );

@@ -1,0 +1,9 @@
+{
+  "users": [
+    { "email": "manager@finsight.com", "role": "manager" },
+    { "email": "finance@finsight.com", "role": "finance" },
+    { "email": "client1@finsight.com", "role": "client", "vendor_id": "client1" },
+    { "email": "client2@finsight.com", "role": "client", "vendor_id": "client2" },
+    { "email": "client3@finsight.com", "role": "client", "vendor_id": "client3" }
+  ]
+}
