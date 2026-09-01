@@ -317,7 +317,11 @@ const App = () => {
 
                             <td>{Array.isArray(tx.risk_reasons) ? tx.risk_reasons.join(', ') : tx.risk_reasons}</td>
 
-                            <td>{tx.final_decision}</td>
+                            <td>
+                              {tx.final_decision === 'FINANCE_APPROVED' && tx.risk_level === 'HIGH' 
+                                ? 'MANAGER_APPROVED' 
+                                : tx.final_decision}
+                            </td>
                           </tr>
                         ))
                       ) : (

@@ -11,6 +11,9 @@ const ApprovalWorkflow = ({ user }) => {
         if (response.ok) {
           const data = await response.json();
           let requests = data.recent_risky_transactions || data.recent_flagged_transactions || [];
+          // Filter out already reviewed transactions
+          requests = requests.filter(tx => tx.final_decision === 'PENDING');
+          
           if (user && user.role === 'manager') {
             requests = requests.filter(tx => tx.risk_level === 'HIGH' || tx.risk_score > 75); // Assuming score > 75 is high if risk_level isn't present
           } else if (user && user.role === 'finance') {
