@@ -60,11 +60,14 @@ const ApprovalWorkflow = ({ user }) => {
 
     const decision = actionType === 'APPROVED' ? 'FINANCE_APPROVED' : 'REJECTED';
 
+    const backendRole = user?.role === 'manager' ? 'FINANCE_MANAGER' : 'FINANCE_TEAM';
+
     const payload = {
       request_id: selectedTx.request_id,
       decision: decision,
       reviewed_by: user?.email || 'Finance Team',
-      description: remarks
+      description: remarks,
+      user_role: backendRole
     };
 
     console.log(`Submitting ${actionType} for ${selectedTx.request_id}`, payload);
