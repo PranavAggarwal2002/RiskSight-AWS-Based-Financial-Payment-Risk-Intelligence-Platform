@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --bg-dark: #0f111a;
-  --bg-card: rgba(26, 29, 39, 0.4);
-  --border-color: rgba(42, 46, 61, 0.5);
-  --text-main: #e2e8f0;
-  --text-muted: #94a3b8;
+  --bg-dark: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(0, 0, 0, 0.15);
+  --text-main: #111827;
+  --text-muted: #4b5563;
   --color-green: #4ade80;
   --color-yellow: #facc15;
   --color-red: #f87171;
@@ -16,7 +16,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--bg-dark);
-  background-image: url('./assets/dashboard-bg.png');
+  background-image: url('./assets/dashboard-bg2.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

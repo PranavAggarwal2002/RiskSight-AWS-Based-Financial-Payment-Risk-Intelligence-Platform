@@ -13,7 +13,7 @@
   font-size: 1.8rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .approval-header p {
@@ -89,7 +89,7 @@
 
 .req-id {
   font-weight: 600;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .req-score {
@@ -135,7 +135,7 @@
 .detail-header h3 {
   margin: 0;
   font-size: 1.4rem;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .info-grid {
@@ -161,7 +161,7 @@
 
 .info-item .value {
   font-size: 1.1rem;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .risk-alert-box {
@@ -174,7 +174,7 @@
 
 /* Review Form Section */
 .review-form {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
@@ -184,7 +184,7 @@
   display: block;
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 0.75rem;
 }
 
@@ -194,11 +194,11 @@
 
 .remarks-input {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem;
-  color: #fff;
+  color: var(--text-main);
   font-size: 0.95rem;
   font-family: inherit;
   resize: vertical;

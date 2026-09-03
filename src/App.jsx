@@ -224,12 +224,12 @@ const App = () => {
 
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#222',
-                          borderColor: '#444',
-                          color: '#fff',
+                          backgroundColor: '#ffffff',
+                          borderColor: 'rgba(0, 0, 0, 0.15)',
+                          color: '#111827',
                         }}
                         itemStyle={{
-                          color: '#fff',
+                          color: '#111827',
                         }}
                       />
 
