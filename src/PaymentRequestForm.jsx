@@ -31,7 +31,7 @@ const PaymentRequestForm = ({ user }) => {
         body: JSON.stringify({
           vendor_id: formData.vendorId,
           account_id: formData.accountId,
-          amount: parseFloat(formData.amount),
+          amount: parseInt(formData.amount, 10),
           timestamp: new Date(formData.timeStamp).toISOString(),
           location: formData.location
         }),
@@ -103,9 +103,9 @@ const PaymentRequestForm = ({ user }) => {
             className="form-input"
             value={formData.amount}
             onChange={handleChange}
-            placeholder="0.00"
+            placeholder="0"
             min="0"
-            step="0.01"
+            step="1"
             required
           />
         </div>
