@@ -132,7 +132,7 @@ const PaymentRequestForm = ({ user }) => {
             className="form-input"
             value={formData.location}
             onChange={handleChange}
-            placeholder="e.g. Mumbai"
+            placeholder="e.g. New York"
             required
           />
         </div>
